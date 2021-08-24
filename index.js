@@ -3,6 +3,7 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const model = require("./model/todos");
+const imgSearch = require("./imgSearch");
 
 //Middlewares
 app.use(express.static(path.join(__dirname, "ui")));
@@ -34,6 +35,24 @@ app.put("/api/todos/:id", (req, res) => {
 app.delete("/api/todos/:id", (req, res) => {
   const result = model.remove(parseInt(req.params.id));
   res.send(result);
+});
+
+//
+//  Routes for image search
+//
+
+const fs = require("fs");
+
+app.get("/api/imgs/:search", (req, res) => {
+  const param = req.params.search;
+  imgSearch.getImages(param, res);
+  // try {
+  //   const jsonString = fs.readFileSync("./images.json");
+  //   res.send(JSON.parse(jsonString));
+  // } catch (ex) {
+  //   console.error(ex);
+  //   res.send({ search: param, message: "image retrieval error" });
+  // }
 });
 
 //Home route for the UI

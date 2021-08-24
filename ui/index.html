@@ -11,7 +11,9 @@
   <body>
     <div class="container" id="mainForm">
       <div class="header">
-        <span class="title">Todo App <button id="add">+</button></span>
+        <span class="title"
+          >Todo App <button id="add" class="add">+</button></span
+        >
         <div class="btngroup">
           <button id="not" class="activeChoice">Incomplete</button>
           <button id="done">Completed</button>
@@ -34,6 +36,16 @@
             id="addform-title"
             placeholder="Title..."
           />
+          <div class="img-display" id="addForm-img">
+            <img
+              src=""
+              alt="image"
+              class="form-img"
+              id="addform-img-display"
+              name=""
+            />
+            <button id="addform-img-btn" class="img-change-btn">Change</button>
+          </div>
           <textarea
             name=""
             id="addform-body"
@@ -51,7 +63,17 @@
     <div class="modal" id="modal">
       <div class="modal-content">
         <div class="modal-input">
-          <input type="text" name="" id="modal-title" />
+          <input type="text" name="" id="modal-title" class="modal-title" />
+          <div class="img-display" id="modal-img">
+            <img
+              src=""
+              alt="image"
+              class="form-img"
+              id="modal-img-display"
+              name=""
+            />
+            <button id="modal-img-btn" class="img-change-btn">Change</button>
+          </div>
           <textarea name="" id="modal-body" cols="30" rows="10"></textarea>
         </div>
         <div class="modal-buttons">
@@ -60,6 +82,38 @@
           <button id="modal-edit">Edit</button>
           <button id="modal-save">Save</button>
         </div>
+      </div>
+    </div>
+    <div class="searchForm" id="searchForm" name="">
+      <div class="header search-header">
+        <span class="title search-title"
+          >Image search
+          <button id="search-exit" class="add search-btn">x</button></span
+        >
+        <div class="btngroup search-btngroup">
+          <input
+            type="text"
+            name=""
+            id="search-query"
+            class="modal-title search-query"
+          />
+          <button id="search-btn" class="search-main-btn">Search</button>
+        </div>
+      </div>
+      <div class="content" id="search-content">
+        <!-- The HTML template for a card -->
+        <!-- <div class="card search-card" id="">
+          <img src="./sunsetbeach.jpg" class="card-img" alt="img here" />
+          <span class="card-title search-card-title">Title her adsfawsdfe</span>
+        </div>
+        <div class="card search-card" id="">
+          <img src="./sunsetbeach.jpg" class="card-img" alt="img here" />
+          <span class="card-title search-card-title">Title her adsfawsdfe</span>
+        </div>
+        <div class="card search-card" id="">
+          <img src="./sunsetbeach.jpg" class="card-img" alt="img here" />
+          <span class="card-title search-card-title">Title her adsfawsdfe</span>
+        </div> -->
       </div>
     </div>
   </body>

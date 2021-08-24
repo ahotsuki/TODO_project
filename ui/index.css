@@ -39,7 +39,7 @@ body {
   color: rgb(37, 129, 235);
 }
 
-#add {
+.add {
   font-size: 0.8em;
   font-weight: bold;
   color: #fff;
@@ -50,7 +50,7 @@ body {
   background: rgb(37, 129, 235);
 }
 
-#add:hover {
+.add:hover {
   color: rgb(37, 129, 235);
   background: #fff;
 }
@@ -166,6 +166,37 @@ This is for the addForm part
   padding: 0.2em;
 }
 
+.img-display {
+  max-width: 150px;
+  min-width: 150px;
+  max-height: 150px;
+  margin-bottom: 1em;
+  border: 1px solid black;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-img {
+  max-width: 148px;
+  max-height: 100px;
+  margin-bottom: 0.1em;
+}
+
+.img-change-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: blue;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  margin: 0;
+}
+
 #addform-body {
   width: 90%;
   height: 70%;
@@ -236,7 +267,7 @@ This is for the modal part
   align-items: center;
 }
 
-#modal-title {
+.modal-title {
   width: 90%;
   font-size: 1.5em;
   margin: 1em 0;
@@ -291,4 +322,84 @@ This is for the modal part
   font-weight: bold;
   color: white;
   cursor: pointer;
+}
+
+/* ///////////////////////////////////
+
+This is for the image search part
+
+////////////////////////////////// */
+
+.searchForm {
+  display: none;
+  min-height: 500px;
+  max-height: 500px;
+  min-width: 460px;
+  max-width: 500px;
+  position: relative;
+  border: 1px solid blue;
+}
+
+.search-header {
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 1em;
+}
+
+.search-title {
+  font-size: 1.5em;
+  margin: 0;
+  margin-top: 0.5em;
+}
+
+.search-btn {
+  background: rgb(224, 74, 74);
+}
+
+.search-btn:hover {
+  color: rgb(224, 74, 74);
+}
+
+.search-btngroup {
+  flex-direction: row;
+}
+
+.search-query {
+  margin: 0;
+  margin-top: 0.4em;
+  font-size: 1.5em;
+  cursor: text;
+}
+
+.search-main-btn {
+  color: #fff;
+  background: rgb(37, 129, 235);
+  font-size: 1em;
+  height: 2.5em;
+  margin-top: 0.6em;
+}
+
+.search-main-btn:hover {
+  border: 2.5px solid green;
+}
+
+.search-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  max-height: 250px;
+}
+
+.card-img {
+  top: 0;
+  max-width: 250px;
+  max-height: 140px;
+  margin-top: 1em;
+}
+
+.search-card-title {
+  margin: 1em;
+  font-size: 0.8em;
 }

@@ -1,4 +1,5 @@
 let STATE = [];
+let imgSTATE = [];
 
 const addbtn = document.getElementById("add");
 const notbtn = document.getElementById("not");
@@ -11,6 +12,8 @@ const addFormCancel = document.getElementById("addform-cancel");
 const addFormSave = document.getElementById("addform-save");
 const addFormTitle = document.getElementById("addform-title");
 const addFormBody = document.getElementById("addform-body");
+const addFormImgBtn = document.getElementById("addform-img-btn");
+const addFormImg = document.getElementById("addform-img-display");
 
 const modal = document.getElementById("modal");
 const modalBack = document.getElementById("modal-back");
@@ -19,13 +22,43 @@ const modalEdit = document.getElementById("modal-edit");
 const modalSave = document.getElementById("modal-save");
 const modalTitle = document.getElementById("modal-title");
 const modalBody = document.getElementById("modal-body");
+const modalImgBtn = document.getElementById("modal-img-btn");
+const modalImg = document.getElementById("modal-img-display");
+
+const searchForm = document.getElementById("searchForm");
+const searchContent = document.getElementById("search-content");
+const searchExit = document.getElementById("search-exit");
+const searchBtn = document.getElementById("search-btn");
+const searchQuery = document.getElementById("search-query");
 
 //initializes the page
 window.onload = initialize();
 
+searchExit.onclick = () => {
+  if (searchForm.attributes.name.value == "add") {
+    searchForm.style.display = "none";
+    addForm.style.display = "flex";
+  }
+  if (searchForm.attributes.name.value == "modal") {
+    searchForm.style.display = "none";
+    modal.style.display = "flex";
+  }
+};
+
+searchBtn.onclick = () => {
+  if (!searchQuery.value) alert("Please fill out search field!");
+  getSearch(searchQuery.value);
+};
+
 addbtn.onclick = () => {
   mainForm.style.display = "none";
   addForm.style.display = "flex";
+};
+
+addFormImgBtn.onclick = () => {
+  searchForm.setAttribute("name", "add");
+  searchForm.style.display = "block";
+  addForm.style.display = "none";
 };
 
 addFormCancel.onclick = () => {
@@ -45,6 +78,7 @@ addFormSave.onclick = () => {
   const data = {
     title: addFormTitle.value,
     body: addFormBody.value,
+    img: JSON.parse(addFormImg.attributes.name.value),
     done: false,
   };
   fetch("/api/todos", {
@@ -91,6 +125,12 @@ donebtn.onclick = () => {
   });
 };
 
+modalImgBtn.onclick = () => {
+  searchForm.setAttribute("name", "modal");
+  modal.style.display = "none";
+  searchForm.style.display = "block";
+};
+
 modalBack.onclick = () => {
   if (!modalTitle.readOnly) {
     if (!confirm("Changes will not be saved. Exit anyway?")) {
@@ -106,6 +146,7 @@ modalEdit.onclick = () => {
   modalBody.readOnly = false;
   modalSave.disabled = false;
   modalEdit.disabled = true;
+  modalImgBtn.disabled = false;
 };
 
 modalSave.onclick = () => {
@@ -114,6 +155,7 @@ modalSave.onclick = () => {
   const data = STATE[index];
   data.title = modalTitle.value;
   data.body = modalBody.value;
+  data.img = JSON.parse(modalImg.attributes.name.value);
   fetch(`/api/todos/${modalTitle.name}`, {
     method: "PUT",
     headers: {
@@ -162,7 +204,22 @@ modalDelete.onclick = () => {
   }
 };
 
-async function initialize() {
+function getSearch(param) {
+  fetch(`/api/imgs/${param}`, {
+    method: "GET",
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      imgSTATE = data;
+      searchContent.innerHTML = "";
+      imgSTATE.forEach((e) => {
+        addImgCard(e);
+      });
+    })
+    .catch((ex) => console.log(ex));
+}
+
+function initialize() {
   fetch("/api/todos", {
     method: "GET",
   })
@@ -204,8 +261,10 @@ function addCard(input) {
     modalTitle.name = STATE[index].id;
     modalBody.value = STATE[index].body;
 
+    modalImg.setAttribute("src", STATE[index].img.url);
     modalTitle.setAttribute("readonly", "readonly");
     modalBody.setAttribute("readonly", "readonly");
+    modalImgBtn.disabled = true;
     modalSave.disabled = true;
   };
 
@@ -245,4 +304,36 @@ function addCard(input) {
   if (input.id !== 0) card.appendChild(check);
   card.appendChild(span);
   container.appendChild(card);
+}
+
+function addImgCard(input) {
+  const div = document.createElement("div");
+  div.setAttribute("class", "card search-card");
+  div.setAttribute("id", JSON.stringify(input));
+  div.onclick = (e) => {
+    const id = e.currentTarget.id;
+    if (searchForm.attributes.name.value == "add") {
+      addFormImg.name = id;
+      addFormImg.setAttribute("src", JSON.parse(id).url);
+      searchForm.style.display = "none";
+      addForm.style.display = "flex";
+    }
+    if (searchForm.attributes.name.value == "modal") {
+      modalImg.name = id;
+      modalImg.setAttribute("src", JSON.parse(id).url);
+      searchForm.style.display = "none";
+      modal.style.display = "flex";
+    }
+  };
+
+  const img = document.createElement("img");
+  img.setAttribute("src", input.url);
+  img.setAttribute("class", "card-img");
+  img.setAttribute("alt", input.snippet);
+  const span = document.createElement("span");
+  span.setAttribute("class", "card-title search-card-title");
+  span.innerHTML = input.snippet;
+  div.appendChild(img);
+  div.appendChild(span);
+  searchContent.appendChild(div);
 }

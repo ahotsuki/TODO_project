@@ -1,38 +1,41 @@
-@route=http://localhost:3000/api/todos
+@route1=http://localhost:3000/api/todos
+@route2=http://localhost:3000/api/imgs
 
 //Get all todos
-GET {{route}}
+GET {{route1}}
 
 ###
 
 
 //Create a todo
-POST {{route}}
+POST {{route1}}
 content-Type: application/json
 
 {
     "title":"sample title",
     "body": "sample description",
+    "img": "",
     "done": false
 }
 ###
 
 
 //Get a specific todo, provided the id
-//Get request with route/:id
-GET {{route}}/3
+//Get request with route1/:id
+GET {{route1}}/3
 
 ###
 
 
 //Update a specific todo, provided the id
-//'Put' request with route/:id
-PUT {{route}}/2
+//'Put' request with route1/:id
+PUT {{route1}}/2
 content-Type: application/json
 
 {
     "title":"updated title",
     "body": "updated description",
+    "img": "",
     "done": false
 }
 
@@ -40,6 +43,11 @@ content-Type: application/json
 
 
 //Delete a specific todo, provided the id
-//'Delete' request with route/:id
-DELETE {{route}}/1
+//'Delete' request with route1/:id
+DELETE {{route1}}/1
+
+###
+
+//Testing the image search endpoint
+GET {{route2}}/black mamba
 
