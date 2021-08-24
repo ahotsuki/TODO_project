@@ -1,0 +1,45 @@
+@route=http://localhost:3000/api/todos
+
+//Get all todos
+GET {{route}}
+
+###
+
+
+//Create a todo
+POST {{route}}
+content-Type: application/json
+
+{
+    "title":"sample title",
+    "body": "sample description",
+    "done": false
+}
+###
+
+
+//Get a specific todo, provided the id
+//Get request with route/:id
+GET {{route}}/3
+
+###
+
+
+//Update a specific todo, provided the id
+//'Put' request with route/:id
+PUT {{route}}/2
+content-Type: application/json
+
+{
+    "title":"updated title",
+    "body": "updated description",
+    "done": false
+}
+
+###
+
+
+//Delete a specific todo, provided the id
+//'Delete' request with route/:id
+DELETE {{route}}/1
+

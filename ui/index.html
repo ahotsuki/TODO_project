@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <link rel="stylesheet" href="index.css" />
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <div class="container" id="mainForm">
+      <div class="header">
+        <span class="title">Todo App <button id="add">+</button></span>
+        <div class="btngroup">
+          <button id="not" class="activeChoice">Incomplete</button>
+          <button id="done">Completed</button>
+        </div>
+      </div>
+      <div class="content" id="content">
+        <!-- The HTML template for a card
+            <div class="card" id="">
+          <input type="checkbox" id="" class="checkbox" />
+          <span class="card-title">Title her adsfawsdfe</span>
+        </div> -->
+      </div>
+    </div>
+    <div class="addForm" id="addForm">
+      <div class="form-content">
+        <div class="form-input">
+          <input
+            type="text"
+            name=""
+            id="addform-title"
+            placeholder="Title..."
+          />
+          <textarea
+            name=""
+            id="addform-body"
+            cols="30"
+            rows="10"
+            placeholder="Description..."
+          ></textarea>
+        </div>
+        <div class="form-buttons">
+          <button id="addform-cancel">Cancel</button>
+          <button id="addform-save">Save</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <div class="modal-input">
+          <input type="text" name="" id="modal-title" />
+          <textarea name="" id="modal-body" cols="30" rows="10"></textarea>
+        </div>
+        <div class="modal-buttons">
+          <button id="modal-back">Back</button>
+          <button id="modal-delete">Delete</button>
+          <button id="modal-edit">Edit</button>
+          <button id="modal-save">Save</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
